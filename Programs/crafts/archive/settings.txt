@@ -1,2 +1,0 @@
-RESULTS=../../../temp/crafts
-MATLAB=C:/Program Files/MATLAB/bin/win64/mcc
