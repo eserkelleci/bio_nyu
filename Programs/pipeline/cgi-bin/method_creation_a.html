@@ -1,0 +1,663 @@
+<html>
+	<head>
+		<title>Method Creation</title>
+		<link rel="stylesheet" href="/tandem/tandem-style.css">
+			<script type="text/javascript">
+<!--
+
+function toggleBox(szDivID,obJect)
+{
+	var obj = document.getElementById(szDivID);
+	if(!obj)	{
+		return;
+	}
+	if(obj.style.display == "none"){
+		obj.style.display = "block";
+		if(obJect)	{
+			obJect.src = '/pics/ffa_expanded.gif';
+		}
+	}
+	else{
+		obj.style.display = "none";
+		if(obJect)	{
+			obJect.src = '/pics/ffa_collapsed.gif';
+		}
+	}
+}
+
+function loadLabel(obJect,ID)
+{
+	if(!obJect)	{
+		return;
+	}
+	var label = document.getElementById(ID);
+	if(!label)	{
+		return;
+	}
+	var a = 0;
+	var string = "";
+	var bFound = 0 ;
+	while(a < obJect.length)	{
+		if(obJect.options[a].selected)	{
+			if(bFound)	{
+				string += ",";
+			}
+			string += obJect.options[a].value;
+			bFound = 1;
+		}
+		a++;
+	}
+	label.value = string;
+	return;
+}
+
+function loadStrings()
+{
+	loadLabel(document.getElementById("rmm0"),"rmm0s");
+	loadLabel(document.getElementById("rpmm"),"rpmms");
+	loadLabel(document.getElementById("refpmm0"),"refpmm0s");
+	loadLabel(document.getElementById("refpmm1"),"refpmm1s");
+}
+
+function showBox(szDivID)
+{
+	var obj = document.getElementById(szDivID);
+	obj.style.display = "block";
+}
+
+function hideBox(szDivID)
+{
+	var obj = document.getElementById(szDivID);
+	obj.style.display = "none";
+}
+
+function checkHunter()
+{
+	var obj = document.getElementById('hunter');
+	if(obj.checked)	{
+		showBox('11000');
+		hideBox('200');
+		hideBox('300');
+		hideBox('400');
+		hideBox('500');
+	}
+}
+
+// -->
+			</script>
+	</head>
+	<body onload="checkHunter();loadStrings();">
+		<form name="tandem_a" action="/pipeline-cgi/thegpm.pl" METHOD="POST" ENCTYPE="multipart/form-data">
+					<TD VALIGN="TOP"><B> Advanced Method Creation</B><BR>
+
+<a href="/pipelines/method_creation.html">Simple</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/pipelines/method_creation_a.html">Advanced</a>
+					<HR>
+					
+<font size=-1><b>Method Name:</b> <INPUT TYPE="text" NAME="method_name" VALUE="">
+<table border="0" cellpadding="0">
+<tr>
+<td><input type="button" class="button1" onClick="hideBox('100');hideBox('200');hideBox('300');hideBox('400');hideBox('500');showBox('600');" value="1. spectra &amp; taxon" title="click to show or hide form information" ID="Button8" NAME="Button2" /></td>
+<td><input type="button" class="button1" onClick="showBox('100');hideBox('200');hideBox('300');hideBox('400');hideBox('500');hideBox('600');" value="2. measurment errors" title="click to show or hide form information" ID="Button2" NAME="Button2" /></td>
+<td><input type="button" class="button1" onClick="hideBox('100');showBox('200');hideBox('300');hideBox('400');hideBox('500');hideBox('600');" value="3. signal processing" title="click to show or hide form information" ID="Button4" NAME="Button2" /></td>
+</tr><tr>
+<td><input type="button" class="button1" onClick="hideBox('100');hideBox('200');showBox('300');hideBox('400');hideBox('500');hideBox('600');" value="4. protein modifications" title="click to show or hide form information" ID="Button5" NAME="Button2" /></td>
+<td><input type="button" class="button1" onClick="hideBox('100');hideBox('200');hideBox('300');showBox('400');hideBox('500');hideBox('600');" value="5. refinement" title="click to show or hide form information" ID="Button6" NAME="Button2" /></td>
+<td><input type="button" class="button1" onClick="hideBox('100');hideBox('200');hideBox('300');hideBox('400');showBox('500');hideBox('600');" value="6. protein cleavage" title="click to show or hide form information" ID="Button7" NAME="Button2" /></td>
+</tr><tr>
+<td><input type="button" class="button1" onClick="showBox('100');showBox('200');showBox('300');showBox('400');showBox('500');showBox('600');" value="           Show all" title="click to show or hide form information" ID="Button7" NAME="Button2" /></td>
+<td align="right" valign="middle">Click to start search:&nbsp;</td>
+<td align="center"><input type="submit" name="submit" value="Save Method" class="button2" title="Click here to perform the search, once you have set all of the necessary parameters" ID="Submit1"/></td>
+</tr>
+</table>
+</center>
+<ol>
+<div style="display:block" id="600">
+<li style="list-style: none;">
+							
+
+	<b>taxon</b><br>
+	<a onClick="toggleBox('10001');" title="click for help">
+	<img valign="center" src="/pics/help.gif" border="0" /></a> Select one or 
+	more. 
+	<div id="10001" style="display:none">
+		<i>parameter name = &quot;protein, taxon&quot;
+		(<a href="http://www.thegpm.org/TANDEM/api/pt.html" target="_help">more ...</a>)</i><br><br>
+		 This selection determines which selection of organisms was the source of your proteins. Some common experimental
+		contaminants, such as bovine serum albumin and trypsin are included in each of the
+		current spectrum libraries by default. See the <a href="http://www.thegpm.org/cRAP/index.html">cRAP</a> documentation for a complete list.<br>
+		You may select one or more species from the lists below to perform your search.
+         </div>
+<script type="text/javascript">
+function UpdateSpecies(checkBox,szDivID)
+{
+	var obj = document.getElementById(szDivID);
+	if(!obj)	{
+		return;
+	}
+	if(checkBox.checked)	{
+		obj.style.display = 'block';
+	}
+	else	{
+		obj.style.display = 'none';
+	}
+}
+</script>
+	<table border="0" ID="Table1">
+
+	<tr>
+	<td colspan="2">
+	<input type="checkbox" CHECKED onClick="UpdateSpecies(this,'eukspecies')">General
+	<input type="checkbox" CHECKED onClick="UpdateSpecies(this,'prokspecies')">Frequent
+	<input type="checkbox" CHECKED onClick="UpdateSpecies(this,'virspecies')">Other
+	</td>
+	</tr><tr>
+	<td valign="top" align="left">
+	<select MULTIPLE size="5" id="eukspecies" class="small_value" name="protein, taxon" >
+	<script src="/tandem/species.js"></script>
+	</select>
+	</td>
+	<td valign="top" align="left">
+	<select MULTIPLE size="5" id="prokspecies" class="small_value" name="protein, taxon1" >
+	<script src="/thegpm/tandem/pro_species.js"></script>
+	</select>
+	</td></tr>
+	<tr> <td colspan="2" valign="top" align="left">
+	<select MULTIPLE size="5" id="virspecies" class="small_value" name="protein, taxon2" >
+	<script src="/tandem/virus_species.js"></script>
+	</select>
+	</td>
+	</tr>
+
+	<tr>
+	<td valign="middle" align="left" colspan="2">
+	&nbsp;&nbsp;&nbsp;&nbsp;1. Reversed sequences: | <input class="small_value" type="radio" checked name="scoring, include reverse" value="no" /> no |
+	<input class="small_value" type="radio" name="scoring, include reverse" value="yes" /> yes |
+	<input class="small_value" type="radio" name="scoring, include reverse" value="only" /> only |<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;2. Use masses for amino acids with all <sup>15</sup>N: <input type="checkbox" name="protein, modified residue mass file" value="../tandem/methods/n15.xml"> yes<br> 
+	&nbsp;&nbsp;&nbsp;&nbsp;3. Check parent ions for charges 1, 2 &amp; 3 <input type="checkbox" class="small_value" name="spectrum, check all charges" value="yes"> yes<br>
+	</td>
+	</tr>
+	<tr>
+	<td valign="middle" align="left" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="submit" value="Save method" class="go_button" title="Click here to perform the search, once you have set all of the necessary parameters" ID="Submit1"/>
+	with peptide log(e) &lt;
+		<select name="output, maximum valid expectation value" class="small_value">
+			<option value="1">0</option>
+			<option value="0.1" selected>-1</option>
+			<option value="0.01">-2</option>
+			<option value="0.001">-3</option>
+			<option value="0.0001">-4</option>
+			<option value="0.00001">-5</option>
+			<option value="0.000001">-6</option>
+			<option value="0.0000001">-7</option>
+			<option value="0.00000001">-8</option>
+			<option value="0.000000001">-9</option>
+		</select>
+	and protein log(e) &lt;
+		<select name="output, maximum valid protein expectation value" class="small_value">
+			<option value="1">0</option>
+			<option value="0.1" selected>-1</option>
+			<option value="0.01">-2</option>
+			<option value="0.001">-3</option>
+			<option value="0.0001">-4</option>
+			<option value="0.00001">-5</option>
+			<option value="0.000001">-6</option>
+			<option value="0.0000001">-7</option>
+			<option value="0.00000001">-8</option>
+			<option value="0.000000001">-9</option>
+		</select>
+
+	</td>
+	</tr>
+	</table>
+<div class="alt">
+	<b>sample information</b>
+	<div style="display:block" id="800">
+		<input type="hidden" class="small_value" name="gpmdb, add" value="yes" />
+		<input type="hidden" class="small_value" name="gpmdb, anonymous" value="no" />
+		<input type="hidden" class="small_value" name="gpmdb, store trace" value="yes" />
+		<table>
+		<tr>
+		<td align="right" valign="top" width="80">name: </td>
+		<td align="left" valign="top"><input size="40" class="small_value" name="gpmdb, name" value="" />
+		</td>
+		</tr>
+		</table>
+		&nbsp;&nbsp;&nbsp;<img  src='/pics/ffa_collapsed.gif' onClick="toggleBox('801',this);" title="click to show or hide form information"/>&nbsp;
+		additional sample information ...
+		
+		<div style="display:none" id="801">
+		<table>	
+		<tr>
+
+		<td align="right" valign="top" width="80">institution: </td>
+		<td align="left" valign="top"><input size="40" class="small_value" name="gpmdb, institution" value="" />
+		</td>
+		</tr><tr>
+		<td align="right" valign="top" width="80">email: </td>
+		<td align="left" valign="top"><input size="40" class="small_value" name="gpmdb, email" value="" />
+		</td>
+		</tr><tr>
+
+		<td align="right" valign="top" width="80">project: </td>
+		<td align="left" valign="top"><input size="40" class="small_value" name="gpmdb, project" value="" />
+		</td>
+		</tr><tr>
+		<td align="right" valign="top" width="80">description: </td>
+		<td align="left" valign="top"><textarea rows="6" cols="45" class="small_value" name="gpmdb, project comment" value=""></textarea>
+		</td>
+
+		</tr>
+		<tr>
+		<td align="right" valign="top" width="80">organelle: <BR>(<a href="http://www.geneontology.org">GO</a>)&nbsp;&nbsp;</td>
+		<td align="left" valign="top">
+			<select MULTIPLE size="5" class="small_value" name="gpmdb, GO subcellular" onmouseover="this.size=10;" onmouseout="this.size=5;">
+				<script src="/tandem/go.js"></script>
+
+			</select>
+		</td>
+		</tr>
+		<tr>
+		<td align="right" valign="top" width="80">cell type: <BR>(<a href="http://www.obofoundry.org/cgi-bin/detail.cgi?id=cell">CELL</a>)&nbsp;&nbsp;</td>
+		<td align="left" valign="top">
+			<select MULTIPLE size="5" class="small_value" name="gpmdb, CELL cell type" onmouseover="this.size=10;" onmouseout="this.size=5;">
+
+				<script src="/tandem/histology.js"></script>
+			</select>
+		</td>
+		</tr>
+		<tr>
+		<td align="right" valign="top" width="80">cell culture: <BR>(<a href="http://www.obofoundry.org/cgi-bin/detail.cgi?id=brenda">BRENDA</a>)&nbsp;&nbsp;</td>
+
+		<td align="left" valign="top">
+			<select MULTIPLE size="5" class="small_value" name="gpmdb, BRENDA cell culture" onmouseover="this.size=10;" onmouseout="this.size=5;">
+				<script src="/tandem/cells.js"></script>
+			</select>
+		</td>
+		</tr>
+		<tr>
+		<td align="right" valign="top" width="80">tissue type: <BR>(<a href="http://www.obofoundry.org/cgi-bin/detail.cgi?id=brenda">BRENDA</a>)&nbsp;&nbsp;</td>
+
+		<td align="left" valign="top">
+			<select MULTIPLE size="5" class="small_value" name="gpmdb, BRENDA tissue" onmouseover="this.size=10;" onmouseout="this.size=5;">
+				<script src="/tandem/tissues.js"></script>
+			</select>
+		</td>
+		</tr>
+		</table>
+		</div>
+	</div>
+</div>
+</div>
+<div style="display:block" id="100">
+							<li style="list-style: none;">
+									<b>2. measurement errors</b>
+										<ol>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/sfmme.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Fragment mass 
+												error: <input size="5" class="small_value" name="spectrum, fragment monoisotopic mass error" value="0.4">&nbsp;<select class="small_value" name="spectrum, fragment monoisotopic mass error units">
+													<option SELECTED value="Daltons">Da</option>
+													<option value="ppm">ppm</option>
+												</select>
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/spmmep.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Parent mass 
+												error: +<input size="3" class="small_value" name="spectrum, parent monoisotopic mass error plus" value="100" ID="Text1">&nbsp;-<input size="3" class="small_value" name="spectrum, parent monoisotopic mass error minus" value="100" ID="Text2">
+												<select class="small_value" name="spectrum, parent monoisotopic mass error units" ID="Select1">
+													<option value="Daltons">Da</option>
+													<option SELECTED value="ppm">ppm</option>
+												</select>
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/spmmie.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Isotope error: <input type="radio" CHECKED class="small_value" name="spectrum, parent monoisotopic mass isotope error" value="yes" ID="Radio1">yes
+												<input type="radio" class="small_value" name="spectrum, parent monoisotopic mass isotope error" value="no">no
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/spmmie.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Fragment type: <input type="radio" CHECKED class="small_value" name="spectrum, fragment mass type" value="monoisotopic" ID="Radio22">monoisotopic
+												<input type="radio" class="small_value" name="spectrum, fragment mass type" value="average" ID="Radio23">average
+											</li>
+										</ol>
+							</li>
+</div>
+<div style="display:block" id="200">
+	<div class="alt">
+							<li style="list-style: none;">
+									<b>3. signal processing</b>
+										<ol>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/sca.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Remove 
+												redundant: <input type="radio" class="small_value" name="spectrum, use contrast angle" value="yes" ID="Radio2">yes
+												<input type="radio" CHECKED class="small_value" name="spectrum, use contrast angle" value="no" ID="Radio3">no,&nbsp;angle:
+												<input size="5" class="small_value" name="spectrum, contrast angle" value="40" ID="Text3">(0-90)
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/smpc.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Maximum parent 
+												charge: <input size="3" class="small_value" name="spectrum, maximum parent charge" value="4">
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/rss.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Spectrum 
+												synthesis: <input type="radio" class="small_value" name="refine, spectrum synthesis" CHECKED value="yes" ID="Radio4">yes
+												<input type="radio" class="small_value" name="refine, spectrum synthesis" value="no" ID="Radio5">no
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/suns.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Noise 
+												suppression: <input type="radio" class="small_value" name="spectrum, use noise suppression" value="yes" ID="Radio6">yes
+												<input type="radio" CHECKED class="small_value" name="spectrum, use noise suppression" value="no" ID="Radio7">no
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/smpmh.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Minmum parent 
+												M+H: <input size="6" class="small_value" name="spectrum, minimum parent m+h" value="500.0" ID="Text4">
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/smfmz.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Minimum 
+												fragment m/z: <input size="6" class="small_value" name="spectrum, minimum fragment mz" value="150.0" ID="Text5">
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/stp.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Total peaks: <input size="6" class="small_value" name="spectrum, total peaks" value="50" ID="Text6">
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/smp.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Minimum peaks: <input size="6" class="small_value" name="spectrum, minimum peaks" value="15" ID="Text7">
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/ftype.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Fragment types:
+													<input type="checkbox" name="scoring, a ions" value="yes" ID="Checkbox1">a
+													<input type="checkbox" CHECKED name="scoring, b ions" value="yes" ID="Radio12">b
+													<input type="checkbox" name="scoring, c ions" value="yes" ID="Radio14">c
+													<input type="checkbox" name="scoring, x ions" value="yes" ID="Radio16">x
+													<input type="checkbox" CHECKED name="scoring, y ions" value="yes" ID="Radio18">y
+													<input type="checkbox" name="scoring, z ions" value="yes" ID="Radio20">z
+											</li>
+										</ol>
+							</li>
+	</div>
+</div>
+<div style="display:block" id="300">
+							<li style="list-style: none;">
+								<b>4. protein modifications</b>
+									<ol>
+		<li valign="top"><a href="http://thegpm.org/TANDEM/api/rmm.html" TARGET="_api" title="click for help">
+
+			<img valign="center" src="/pics/help.gif" border="0" /></a> Complete modifications (<a href="http://www.unimod.org/" title="Check UNIMOD to find modification masses" TARGET="_api">unimod</a>)
+			<table width="640" cellspacing="0" cellpadding="0"><tr><td width="320" valign="top" align="left">
+			<b>Set 1</b><br>
+			<select id="rmm0" class="small_value" name="residue, modification mass select" onChange="loadLabel(this,'rmm0s');">
+			<script src="/tandem/g_rmm.js"></script>
+			</select><br>
+			<input id="rmm0s" size="30" class="small_value" name="residue, modification mass" value="">
+
+			<a href="http://thegpm.org/TANDEM/api/rmm.html" TARGET="_api" title="click for help">
+			<img valign="center" src="/pics/help.gif" border="0" /></a> specify your own
+		</td><td width="320" valign="top" align="left">
+			<b>Set 2</b><br>
+			<select id="rmm1" class="small_value" name="residue, modification mass 1 select"  onChange="loadLabel(this,'rmm1s');">
+			<script src="/tandem/g_rmm1.js"></script>
+			</select><br>
+			<input id="rmm1s" size="30" class="small_value" name="residue, modification mass 1" value="">
+
+			<a onClick="toggleBox('301',this);" title="click here to display more sets of complete modifications">more sets ...</a>
+		</td></tr></table>
+	<div style="display:none" id="301">
+			<table width="640" cellspacing="0" cellpadding="0"><tr><td width="320" valign="top" align="left">
+			<b>Set 3</b><br>
+			<select id="rmm2" class="small_value" name="residue, modification mass 2 select"  onChange="loadLabel(this,'rmm2s');">
+			<script src="/tandem/g_rmm1.js"></script>
+
+			</select><br>
+			<input id="rmm2s" size="30" class="small_value" name="residue, modification mass 2" value="">
+		</td><td width="320" valign="top" align="left">
+			<b>Set 4</b><br>
+			<select id="rmm3" class="small_value" name="residue, modification mass 3 select"  onChange="loadLabel(this,'rmm3s');">
+			<script src="/tandem/g_rmm1.js"></script>
+			</select><br>
+			<input id="rmm3s" size="30" class="small_value" name="residue, modification mass 3" value="">
+
+		</td></tr></table>
+	</div>
+		</li>
+		<li><a href="http://thegpm.org/TANDEM/api/rpmm.html" TARGET="_api" title="click for help">
+			<img valign="center" src="/pics/help.gif" border="0" /></a>
+			Potential modifications 
+			(<a href="http://www.unimod.org/" title="Check UNIMOD to find modification masses" TARGET="_api">unimod</a>) 
+			<table>
+			<tr><td valign="top">
+
+			<select id="rpmm" id="rpmm" MULTIPLE size="4" class="small_value" name="residue, potential modification mass select" onChange="loadLabel(this,'rpmms');">
+			<script src="/tandem/g_rpmm.js"></script>
+			</select>
+			</td><td valign="middle" align="left">
+			<a href="http://thegpm.org/TANDEM/api/rpmm.html" TARGET="_api" title="click for help">
+			<img valign="center" src="/pics/help.gif" border="0" /></a> specify your own  
+			<input id="rpmms" size="30" class="small_value" name="residue, potential modification mass" value="">
+			</td>
+
+			</tr>
+			</table>
+		</li>
+										<li>
+											<a href="http://thegpm.org/TANDEM/api/rpmmotif.html" TARGET="_api" title="click for help">
+												<img valign="center" src="/pics/help.gif" border="0" /></a> Potential 
+											motif: <input size="30" class="small_value" name="residue, potential modification motif" value="" ID="Text7">
+										</li>
+		<li>	<a href="http://thegpm.org/TANDEM/api/pua.html" TARGET="_api" title="click for help">
+			<img valign="center" src="/pics/help.gif" border="0" /></a>
+			Use sequence annotations <input type="radio" class="small_value" value="yes" name="protein, use annotations" /> yes
+			<input type="radio" CHECKED class="small_value" value="no" name="protein, use annotations" /> no
+		</li>
+										<li>
+											<a href="http://thegpm.org/TANDEM/api/pntrmm.html" TARGET="_api" title="click for help">
+												<img valign="center" src="/pics/help.gif" border="0" /></a> Protein 
+											N-terminus: <input size="10" class="small_value" name="protein, N-terminal residue modification mass" value="0.0" ID="Text8">
+											&nbsp;Da
+										</li>
+										<li>
+											<a href="http://thegpm.org/TANDEM/api/pctrmm.html" TARGET="_api" title="click for help">
+												<img valign="center" src="/pics/help.gif" border="0" /></a> Protein 
+											C-terminus: <input size="10" class="small_value" name="protein, C-terminal residue modification mass" value="0.0" ID="Text9">&nbsp;Da
+										</li>
+									</ol>
+							</li>
+</div>
+<div style="display:block" id="400">
+	<div class="alt">
+							<li style="list-style: none;">
+									<b>5. refinement specification</b>
+										<ol>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/refine.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Refine model: <input type="radio" class="small_value" name="refine" CHECKED value="yes" ID="Radio3">yes
+												<input type="radio" class="small_value" name="refine" value="no" ID="Radio4">no
+											</li>
+			<li>	<a href="http://thegpm.org/TANDEM/api/rua.html" TARGET="_api" title="click for help">
+				<img valign="center" src="/pics/help.gif" border="0" /></a>
+				Use sequence annotations <input type="radio" CHECKED class="small_value" value="yes" name="refine, use annotations" /> yes
+				<input type="radio" class="small_value" value="no" name="refine, use annotations" /> no
+			</li>
+			<li>
+				<a href="http://thegpm.org/TANDEM/api/rpm.html" TARGET="_api" title="click for help">
+				<img valign="center" src="/pics/help.gif" border="0" /></a> Point 
+				mutations: <input type="radio" class="small_value" name="refine, point mutations" value="yes" ID="Radio5">yes
+				<input type="radio" class="small_value" name="refine, point mutations" CHECKED value="no" ID="Radio6">no
+			</li>
+			<li>
+				<a href="http://thegpm.org/TANDEM/api/rsaps.html" TARGET="_api" title="click for help">
+				<img valign="center" src="/pics/help.gif" border="0" /></a> Single 
+				amino acid polymorphisms: <input type="radio" class="small_value" name="refine, saps" CHECKED value="yes" ID="Radio5">yes
+				<input type="radio" class="small_value" name="refine, saps" value="no" ID="Radio6">no
+			</li>
+			<li>
+				<a href="http://thegpm.org/TANDEM/api/refpmm.html" TARGET="_api" title="click for help">
+				<img valign="center" src="/pics/help.gif" border="0" /></a>
+				Potential modifications	(<a href="http://www.unimod.org/" title="Check UNIMOD to find modification masses" TARGET="_api">unimod</a>):
+				<table width="600" border="0">
+					<tr>
+						<td align="left" valign="top" width="300"><b>round 1</b></td>
+						<td align="left" valign="top" width="300"><b>round 2</b></td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" width="300">
+							<select id="refpmm0" MULTIPLE size="4" class="small_value" name="refine, potential modification mass select" onChange="loadLabel(this,'refpmm0s');">
+								<script src="/tandem/g_refpmm.js"></script>
+							</select>
+							<br>&nbsp;mods: <input size="25" class="small_value" name="refine, potential modification mass" value="" id="refpmm0s">
+							<a href="http://thegpm.org/TANDEM/api/refpmm.html" TARGET="_api" title="click for help">
+							<img valign="center" src="/pics/help.gif" border="0" /></a> 
+							<br>motifs: <input size="25" class="small_value" name="refine, potential modification motif" value="">
+							<a href="http://thegpm.org/TANDEM/api/refpmmotif.html" TARGET="_api" title="click for help">
+							<img valign="center" src="/pics/help.gif" border="0" /></a>
+						</td>
+						<td align="left" valign="top"  width="300">
+							<select id="refpmm1" MULTIPLE size="4" class="small_value" name="refine, potential modification mass 1 select" onChange="loadLabel(this,'refpmm1s');">
+								<script src="/tandem/g_refpmm1.js"></script>
+							</select>
+							<br>&nbsp;mods: <input size="25" class="small_value" name="refine, potential modification mass 1" value="" id="refpmm1s">
+							<br>motifs: <input size="25" class="small_value" name="refine, potential modification motif 1" value="">
+						</td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" width="300"><b>round 3</b></td>
+						<td align="left" valign="top" width="300"><b>round 4</b></td>
+					</tr>
+					<tr>
+						<td align="left" valign="top" width="300">
+							<select id="refpmm2" MULTIPLE size="4" class="small_value" name="refine, potential modification mass 2 select" onChange="loadLabel(this,'refpmm2s');">
+								<script src="/tandem/g_refpmm2.js"></script>
+							</select>
+							<br>&nbsp;mods: <input size="25" class="small_value" name="refine, potential modification mass 2" value="" id="refpmm2s">
+							<br>motifs: <input size="25" class="small_value" name="refine, potential modification motif 2" value="">
+						</td>
+						<td align="left" valign="top"  width="300">
+							<select id="refpmm3" MULTIPLE size="4" class="small_value" name="refine, potential modification mass 3 select" onChange="loadLabel(this,'refpmm3s');">
+								<script src="/tandem/g_refpmm3.js"></script>
+							</select>
+							<br>&nbsp;mods: <input size="25" class="small_value" name="refine, potential modification mass 3" value="" ID="refpmm3s">
+							<br>motifs: <input size="25" class="small_value" name="refine, potential modification motif 3" value="" ID="Text11">
+						</td>
+					</tr>
+				</table>
+			</li>
+			<li>
+				<a href="http://thegpm.org/TANDEM/api/pcsm.html" TARGET="_api" title="click for help">
+				<img valign="center" src="/pics/help.gif" border="0" /></a>
+				Semi-cleavage:
+				<input type="radio" class="small_value" name="refine, cleavage semi" value="yes">yes
+				<input type="radio" CHECKED class="small_value" name="refine, cleavage semi" value="no">no
+			</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/rupmffr.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Use these 
+												modifications throughout: <input type="radio" class="small_value" name="refine, use potential modifications for full refinement" value="yes" ID="Radio7">yes
+												<input type="radio" class="small_value" name="refine, use potential modifications for full refinement" CHECKED value="no" ID="Radio8">no
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/ruc.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Unantipated 
+												cleaves ([X]|[X]): <input type="radio" class="small_value" name="refine, unanticipated cleavage" checked value="yes" ID="Radio9">yes
+												<input type="radio" class="small_value" name="refine, unanticipated cleavage" value="no" ID="Radio10">no
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/refpntm.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Potential 
+												N-terminus modifications: <input class="small_value" name="refine, potential N-terminus modifications" value="" ID="Text12">
+											</li>
+											<li>
+												<a href="http://thegpm.org/TANDEM/api/refpctm.html" TARGET="_api" title="click for help">
+													<img valign="center" src="/pics/help.gif" border="0" /></a> Potential 
+												C-terminus modifications: <input class="small_value" name="refine, potential C-terminus modifications" value="" ID="Text13">
+											</li>
+<li>
+	<a href="http://thegpm.org/TANDEM/api/refmvev.html" TARGET="_api" title="click for help">
+	<img valign="center" src="/pics/help.gif" border="0" /></a> Valid 
+	expectation: &lt; 
+
+<select name="refine, maximum valid expectation value" class="small_value" ID="Select2">
+	<option value="1">0</option>
+	<option value="0.1">-1</option>
+	<option value="0.01" selected>-2</option>
+	<option value="0.001">-3</option>
+	<option value="0.0001">-4</option>
+	<option value="0.00001">-5</option>
+
+	<option value="0.000001">-6</option>
+	<option value="0.0000001">-7</option>
+	<option value="0.00000001">-8</option>
+	<option value="0.000000001">-9</option>
+</select>
+</li>
+										</ol>
+							</li>
+	</div>
+</div>
+<div style="display:block" id="500">
+							<li style="list-style: none;">
+								<b>6. protein cleavage specification</b>
+									<ol>
+										<li>
+											Cleavage site:<br>
+											<select class="small_value" name="protein, cleavage site select">
+												<script src="/tandem/g_pcs.js"></script>
+											</select><br>
+											<a href="http://thegpm.org/TANDEM/api/pcs.html" TARGET="_api" title="click for help">
+												<img valign="center" src="/pics/help.gif" border="0" /></a> <input size="15" class="small_value" name="protein, cleavage site" value="">
+											specify your own
+										</li>
+			<li>
+				<a href="http://thegpm.org/TANDEM/api/pcsm.html" TARGET="_api" title="click for help">
+				<img valign="center" src="/pics/help.gif" border="0" /></a>
+				Semi-cleavage:
+				<input type="radio" class="small_value" name="protein, cleavage semi" value="yes">yes
+				<input type="radio" CHECKED class="small_value" name="protein, cleavage semi" value="no">no
+			</li>
+			<li>
+				N-terminus limit:
+		<select name="protein, cleavage N-terminal limit" class="small_value">
+			<option value="" selected>none</option>
+			<option value="10">10</option>
+			<option value="20">20</option>
+			<option value="30">30</option>
+			<option value="40">40</option>
+		</select>
+			</li>
+										<li>
+											<a href="http://thegpm.org/TANDEM/api/smmcs.html" TARGET="_api" title="click for help">
+												<img valign="center" src="/pics/help.gif" border="0" /></a> Missed cleavage 
+											sites allowed: <input size="5" class="small_value" name="scoring, maximum missed cleavage sites" value="1">
+										</li>
+										<li>
+											<a href="http://thegpm.org/TANDEM/api/pcctmc.html" TARGET="_api" title="click for help">
+												<img valign="center" src="/pics/help.gif" border="0" /></a> Cleavage 
+											C-terminal change: <input size="10" class="small_value" name="protein, cleavage C-terminal mass change" value="+17.002735">&nbsp;Da
+										</li>
+										<li>
+											<a href="http://thegpm.org/TANDEM/api/pcntmc.html" TARGET="_api" title="click for help">
+												<img valign="center" src="/pics/help.gif" border="0" /></a> Cleavage 
+											N-terminal change: <input size="10" class="small_value" name="protein, cleavage N-terminal mass change" value="+1.007825">&nbsp;Da
+										</li>
+									</ol>
+							</li>
+</div>
+						</ol>
+					</TD>
+				</TR>
+			</TABLE>
+			<input type="hidden" name="output, xsl path" value="/tandem/tandem-style.xsl" />
+			<input type="hidden" name="list path, default parameters" value="../tandem/methods/qstar.xml" />
+			<input type="hidden" name="output, xsl path" value="/tandem/tandem-style.xsl" ID="Hidden1" />
+			<input type="hidden" name="output, sort results by" value="protein" ID="Hidden2">
+			<input type="hidden" name="output, results" value="valid" ID="Hidden3">
+		</form>
+		<script src="footnote.js"></script>
+	</body>
+</html>

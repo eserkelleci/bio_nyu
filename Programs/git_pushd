@@ -1,0 +1,2 @@
+#!/bin/bash
+git push ssh://fenyod01@fen.nyumc.org/ifs/data/proteomics/git/$1.git master

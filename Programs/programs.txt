@@ -1,0 +1,10 @@
+Create mzXML	ProteoWizard_exp.pl	D:\Server\ProteoWizard\	*	--filter "msLevel 1-" --filter "peakPicking true 1-" --filter "threshold count 100 most-intense"	del
+Create MGF	mzXMLtoMGF_exp.pl	D:\Programs\process_data\	*		del
+QC	qc_mgf_exp.pl	D:\Programs\process_data\	*		
+QC	qc_mzxml_exp.pl	D:\Programs\process_data\	*		
+ID	xhunter.pl	D:\Programs\identification\			del
+ID	xtandem.pl	D:\Programs\identification\	*		del
+ID	xtandem_cluster.pl	D:\Programs\identification\			del
+ID	mass_calibration_exp.pl	D:\Programs\identification\		1e-3 MS1 MS2	
+Quant	spectrum_count_tandem_exp.pl	D:\Programs\spectrum_count\	*	1e-3	
+Cleanup	del_exp.pl	D:\Programs\process_data\	*		

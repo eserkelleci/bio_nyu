@@ -1,0 +1,16 @@
+DATA=//hpc-isilon-a.nyumc.org/proteomics/data/Fenyo
+TASKS=//hpc-isilon-a.nyumc.org/proteomics/pipelinedev0
+RESULT=//hpc-isilon-a.nyumc.org/proteomics/results/Fenyo
+RESTANDEM=/ifs/data/proteomics/results/Fenyo
+TANDEMCLUSTER=/ifs/data/proteomics/tandem
+DEMON=0
+Tandem_threads=4
+R=C:\R\bin\x64\Rterm.exe
+RAR=C:\Program Files (x86)\WinRAR\Rar.exe
+MATLAB=C:\Program Files\Matlab\R2010b\bin\win64\mcc
+XTANDEM=10.193.36.237
+SSH=C:\Program Files (x86)\SSH Communications Security\SSH Secure Shell\ssh2
+USER=proteomics@fen.nyumc.org
+OWNER=Fenyo
+HOST=10.134.50.51
+ADMIN_IPS=10.193.37.97,10.193.36.219,10.193.36.186,10.193.36.237,10.193.36.164,
